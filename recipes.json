@@ -1,0 +1,34 @@
+{
+    "recipes": [
+        {
+            "hyperlink": "https://www.platingsandpairings.com/peruvian-grilled-chicken-creamy-green-sauce/",
+            "meal_type": "DINNER",
+            "recipe_time": {
+                "days": 0,
+                "hours": 8,
+                "minutes": 50
+            },
+            "ingredients": [
+                {
+                    "name": "chicken thighs",
+                    "quantity": 2,
+                    "unit": "pounds",
+                    "cost": 10.00
+                },
+                {
+                    "name": "garlic",
+                    "quantity": 5,
+                    "unit": "cloves",
+                    "cost": 0.26
+                },
+                {
+                    "name": "soy sauce",
+                    "quantity": 1,
+                    "unit": "THIRD_CUP",
+                    "cost": 1.26
+                }
+            ],
+            "total_cost": 11.52
+        }
+    ]
+}
