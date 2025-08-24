@@ -1,59 +1,15 @@
-"""
-Data types:
+from utils import MealType, RecipeTime
+from recipe import Recipe
 
-@dataclass
-Ingredient:
-    name: str
-    quantity: float
-    unit: MeasuringUnit
-    cost: float
-
-@dataclass
-RecipeTime:
-    days: int
-    hours: int
-    minutes: int
-
-class MealType(Enum):
-    BREAKFAST = 1
-    LUNCH = 2
-    DINNER = 3
-    SIDES = 4
-    APPETIZER = 5
-    DESSERT = 6
-
-class MeasuringUnit(Enum):
-    QUARTER_TEASPOON = 1
-    HALF_TEASPOON = 2
-    TEASPOON = 3
-    HALF_TABLESPOON = 4
-    TABLESPOON = 5
-    FOURTH_CUP = 6
-    THIRD_CUP = 7
-    HALF_CUP = 8
-    THREE_FOURTHS_CUP = 9
-    CUP = 10
-    OZ = 11
-
-class Recipe:
-    hyperlink: <str optional>
-    meal_type: MealType
-    recipe_time: RecipeTime
-    ingredients: list[Ingredient]
-    total_cost: float
-
-    def consolidate_ingredients(self):
-        "Consolidates duplicate ingredients by adding their quantities and displaying them in a common unit type
-        We will assume that whichever duplicate occurs first is the units we will use to convert the others to"
-        pass
-    
-    def calculate_total_cost(self):
-        "Use the list of ingredients to calculate the total cost by summing their indiviual cost"
+import time
 
 class RecipeBuilder:
-    recipes: list[Recipe]
 
-    def filter_by_meal_type(self, meal_type: MealType)
+    def __init__(self):
+        self.recipes = self.load_recipes_from_json()
+        self.valid_ingredients = self.load_valid_ingredients_from_json()
+
+    def filter_by_meal_type(self, meal_type: MealType):
         "We reduce the number of recipes by those which have the matching MealType"
         pass
         
@@ -89,13 +45,67 @@ class RecipeBuilder:
         "Delete an existing recipe from the RecipeBuilder class and the recipes.json file"
         pass
 
+    def search_for_recipe(self, recipe_name: str) -> list[Recipe]:
+        """Retrieve a recipe by searching for it by name and then display options for editting or deleting this recipe
+
+        Args:
+            recipe_name (str): the name of the recipe
+        """
+
     def main_menu(self):
         "Displays a selection menu for the user"
-        pass
+        
+        while True:
+            self.display_main_menu()
+            selection = input("Selection: ")
+            if not self.is_valid_user_input(selection=selection):
+                print(f"Invalid input: {selection}")
+                time.sleep(1)
+                continue
+            else:
+                should_exit = self.direct_user_to_correct_page(selection=selection)
+                if should_exit:
+                    print("Thanks for using the Recipe Builder App!")
+                    break
+            
+    def display_main_menu(self):
+        print("Welcome to the Recipe Builder App! Please select one of the following options:\n")
+        print("1.   Add a new recipe")
+        print("2.   Search for a recipe")
+        print("3.   Filter recipes by cost")
+        print("4.   Filter recipes by meal type")
+        print("5.   Filter recipes by time")
+        print("q.   Quit the app")
+        print()
+
+    def is_valid_user_input(self, selection: str):
+        if selection in "12345qQ":
+            return True
+        else:
+            return False
+        
+    def direct_user_to_correct_page(self, selection: str):
+        if selection == '1':
+            return False
+        elif selection == '2':
+            return False
+        elif selection == '3':
+            return False
+        elif selection == '4':
+            return False
+        elif selection == '5':
+            return False
+        elif selection == 'q' or selection == 'Q':
+            return True
+        else:
+            print("Invalid option, this should never execute!")
+            return False
 
     def main(self):
-        "Main event loop which
-        1. load_valid_ingredients_from_json()
-        2. load_recipes_from_json()
-        3. main_menu()"
-"""
+        """Main event loop"""
+        self.main_menu()
+
+
+if __name__ == "__main__":
+    recipe_builder = RecipeBuilder()
+    recipe_builder.main()
